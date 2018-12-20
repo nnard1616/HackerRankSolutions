@@ -52,7 +52,7 @@ bool sorting::comparator(Player a, Player b) {
 }
 
 
-
+// done
 int sorting::activityNotifications(vector<int> expenditure, int d) {
     int result = 0;
     double median;
@@ -71,7 +71,7 @@ int sorting::activityNotifications(vector<int> expenditure, int d) {
         if (*e >= 2*median){
             result++;
         }
-        
+
         window.erase(common::binary_search(*b, window));
         window.insert(common::binary_search(*e, window), *e);
         b++;
