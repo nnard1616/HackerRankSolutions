@@ -51,9 +51,32 @@ bool sorting::comparator(Player a, Player b) {
     return result;
 }
 
-int sorting::activityNotifications(vector<int> expenditure, int d) {
-    int result;
 
+
+int sorting::activityNotifications(vector<int> expenditure, int d) {
+    int result = 0;
+    double median;
+
+    auto b = expenditure.begin();
+    auto e = expenditure.begin()+d;
+    vector<int> window = common::subVector<int>(b, e);
+    while (e != expenditure.end()){
+
+        if (d % 2 == 0){
+            median = (window[d/2] + window[d/2-1])/2.0;
+        } else{
+            median = window[d/2];
+        }
+
+        if (*e >= 2*median){
+            result++;
+        }
+        
+        window.erase(common::binary_search(*b, window));
+        window.insert(common::binary_search(*e, window), *e);
+        b++;
+        e++;
+    }
 
     return result;
 }

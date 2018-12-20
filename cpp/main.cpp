@@ -11,22 +11,16 @@ using namespace std;
 
 int main() {
 
-    deque<int> a{5,6,2,1,2,9,4,5};
+    vector<int> a{10, 20, 30, 40, 70, 10, 10, 10, 10, 10};
     vector<Player> v{Player(100, "amy"),
                      Player(100, "david"),
                      Player(50, "heraldo"),
                      Player(75, "aakansha"),
                      Player(150, "aleksa")};
 
-    deque<int> b;
 
-    b.push_back(4);
-    b.push_back(5);
-
-    b.pop_front();
-
-    common::print_container(b);
-    cout << a[1] << endl;
+    int b = sorting::activityNotifications(a, 3);
+    cout << b << endl;
     return 0;
 
 }

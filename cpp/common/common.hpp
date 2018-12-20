@@ -183,6 +183,15 @@ namespace common{
 
     }
 
+    template<typename T>
+    vector<T> subVector(typename vector<T>::iterator begin, typename vector<T>::iterator end){
+        vector<T> result;
+        for (auto itr = begin; itr != end; itr++){
+            result.insert(common::binary_search(*itr, result), *itr);
+        }
+        return result;
+    }
+
 
 }
 #endif //CPP_COMMON_HPP
