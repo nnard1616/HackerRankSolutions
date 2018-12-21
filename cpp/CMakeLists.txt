@@ -13,17 +13,17 @@ add_executable(cpp
                interview_preparation/hash_tables.hpp
                interview_preparation/sorting.hpp
                interview_preparation/sorting.cpp
-               Custom_Datastructures/Priority_Deque.hpp)
+               Custom_Datastructures/Priority_Deque.hpp interview_preparation/string_manipulation.cpp interview_preparation/string_manipulation.hpp)
 
 add_library(cppStatic STATIC
-               interview_preparation/arrays.cpp
-               interview_preparation/arrays.hpp
+            interview_preparation/arrays.cpp
+            interview_preparation/arrays.hpp
             common/common.hpp
-               interview_preparation/hash_tables.cpp
-               interview_preparation/hash_tables.hpp
-               interview_preparation/sorting.hpp
-               interview_preparation/sorting.cpp
-               Custom_Datastructures/Priority_Deque.hpp)
+            interview_preparation/hash_tables.cpp
+            interview_preparation/hash_tables.hpp
+            interview_preparation/sorting.hpp
+            interview_preparation/sorting.cpp
+            Custom_Datastructures/Priority_Deque.hpp interview_preparation/string_manipulation.cpp interview_preparation/string_manipulation.hpp)
 
 enable_testing()
 add_subdirectory(unitTests)

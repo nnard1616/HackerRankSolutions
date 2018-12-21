@@ -4,6 +4,7 @@
 
 #include "sorting.hpp"
 
+
 void sorting::countSwaps(vector<int> a) {
     int swaps = 0;
 
@@ -52,32 +53,42 @@ bool sorting::comparator(Player a, Player b) {
 }
 
 
-// done
 int sorting::activityNotifications(vector<int> expenditure, int d) {
     int result = 0;
     double median;
 
-    auto b = expenditure.begin();
-    auto e = expenditure.begin()+d;
-    vector<int> window = common::subVector<int>(b, e);
-    while (e != expenditure.end()){
+    auto startOfWindow = expenditure.begin();
+    auto endOfWindow = expenditure.begin()+d;
+
+    // window is [startOfWindow, endOfWindow), right bound excluded.
+    vector<int> window = common::subVector<int>(startOfWindow, endOfWindow);
+
+    // slide window along array.
+    // endOfWindow points to the next transaction to be added to the window.
+    while (endOfWindow != expenditure.end()){
 
         if (d % 2 == 0){
+            // even median
             median = (window[d/2] + window[d/2-1])/2.0;
         } else{
+            // odd median
             median = window[d/2];
         }
 
-        if (*e >= 2*median){
+        if (*endOfWindow >= 2*median){
             result++;
         }
 
-        window.erase(common::binary_search(*b, window));
-        window.insert(common::binary_search(*e, window), *e);
-        b++;
-        e++;
+        // update window
+        window.erase(common::binary_search(*startOfWindow, window));
+        window.insert(common::binary_search(*endOfWindow, window), *endOfWindow);
+        startOfWindow++;
+        endOfWindow++;
     }
 
     return result;
 }
+
+
+
 
