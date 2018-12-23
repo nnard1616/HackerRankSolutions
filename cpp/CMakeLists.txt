@@ -13,7 +13,7 @@ add_executable(cpp
                interview_preparation/hash_tables.hpp
                interview_preparation/sorting.hpp
                interview_preparation/sorting.cpp
-               Custom_Datastructures/Priority_Deque.hpp interview_preparation/string_manipulation.cpp interview_preparation/string_manipulation.hpp)
+               Custom_Datastructures/Priority_Deque.hpp interview_preparation/string_manipulation.cpp interview_preparation/string_manipulation.hpp interview_preparation/greedy_algorithms.cpp interview_preparation/greedy_algorithms.hpp)
 
 add_library(cppStatic STATIC
             interview_preparation/arrays.cpp
@@ -23,7 +23,7 @@ add_library(cppStatic STATIC
             interview_preparation/hash_tables.hpp
             interview_preparation/sorting.hpp
             interview_preparation/sorting.cpp
-            Custom_Datastructures/Priority_Deque.hpp interview_preparation/string_manipulation.cpp interview_preparation/string_manipulation.hpp)
+            Custom_Datastructures/Priority_Deque.hpp interview_preparation/string_manipulation.cpp interview_preparation/string_manipulation.hpp interview_preparation/greedy_algorithms.cpp interview_preparation/greedy_algorithms.hpp)
 
 enable_testing()
 add_subdirectory(unitTests)
