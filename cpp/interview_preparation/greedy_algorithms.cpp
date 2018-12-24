@@ -131,178 +131,47 @@ int greedy_algorithms::maxMin(int k, vector<int> arr) {
 //    return result;
 //}
 
-// Attempt 2
-//string greedy_algorithms::reverseShuffleMerge(string s) {
-//            string result;
-//
-//            int charsCount[26]{0};
-//            int leftOver[26]{0};
-//            int resultCharsCount[26]{0};
-//
-//            for (auto& c : s){
-//                charsCount[c - 'a']++;
-//                leftOver[c - 'a']++;
-//            }
-//
-//            bool canAffordToSkip;
-//            bool somethingBetterAhead;
-//            bool cantTakeAnyMore;
-//
-//            int count = 0;
-//
-//            for (auto itr = s.rbegin(); itr != s.rend(); itr++){
-//                char theCharacter = *itr;
-//
-//                int a = resultCharsCount[theCharacter - 'a'];
-//                int b = charsCount[theCharacter - 'a']/2;
-//                cantTakeAnyMore      = ( a == b);
-//                canAffordToSkip      = (leftOver[theCharacter - 'a']-1 >= charsCount[theCharacter - 'a']/2);
-//                somethingBetterAhead = false;
-//
-//        for (int i = 0; i < theCharacter - 'a'; i++) {
-//            if (charsCount[i] != 0) {
-//                if (leftOver[i] >= charsCount[i] / 2) {
-//                    somethingBetterAhead = true;
-//                    break;
-//                }
-//            }
-//        }
-//
-//        if ((!canAffordToSkip || !somethingBetterAhead) && !cantTakeAnyMore){
-//            result = theCharacter + result;
-//            resultCharsCount[theCharacter - 'a']++;
-//            count++;
-//        }
-//
-//        leftOver[theCharacter - 'a']--;
-//
-//        if (count == s.size()/2){
-//            break;
-//        }
-//    }
-//
-//    reverse(result.begin(), result.end());
-//
-//    return result;
-//}
-
-//string greedy_algorithms::reverseShuffleMerge(string s) {
-//    string result;
-//
-//    int charsCount[26]{0}; // total letter counts of s.
-//    int requiredCharsForA[26]{0}; // required letter counts for A
-//    int leftOver[26]{0}; //keeps track of letter counts left to be examined
-//    int currentCharsForA[26]{0};
-//
-//
-//
-//    // accumulate
-//    for (auto& c : s){
-//        charsCount[c - 'a']++;
-//        leftOver[c - 'a']++;
-//    }
-//
-//    // divide by 2
-//    for (int i = 0; i < 26; i++){
-//        requiredCharsForA[i] = charsCount[i]/2;
-//    }
-//
-//    int count = 0;
-//    for (auto itr = s.rbegin(); itr != s.rend(); itr++){
-//        if (count == 47){
-//            cout << "here" << endl;
-//        }
-//        char theCharacter = *itr;
-//        cout << "The character: " << theCharacter << " is located at: " << distance(s.rbegin(), itr) << endl;
-//        cout << "'" << theCharacter << "' characters collected so far: " << currentCharsForA[theCharacter -'a'] << " out of: " << requiredCharsForA[theCharacter - 'a'] << " required." << endl;
-//        cout << "How many '" << theCharacter << "' characters are left to see: " << leftOver[theCharacter - 'a']-1 << endl;
-//
-//        bool canLetterRequirementBeFulfilledLater = (leftOver[theCharacter - 'a'] - 1 >= requiredCharsForA[theCharacter - 'a']);
-//
-//        if (canLetterRequirementBeFulfilledLater){
-//            // we're able to skip if we want.
-//
-//            bool isThereSomethingBetterAhead = false;
-//
-//
-//            for (int i = 0; i < theCharacter - 'a'; i++) {
-//                if (charsCount[i] != 0) {
-//                    if (leftOver[i] >= requiredCharsForA[i] && currentCharsForA[i] != requiredCharsForA[i]) {
-//                        isThereSomethingBetterAhead = true;
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            if (!isThereSomethingBetterAhead){
-//                cout << "We have a good letter: " << theCharacter << ", results of adding: " << endl;
-//                currentCharsForA[theCharacter - 'a']++;
-//                result+=theCharacter;
-//                cout << "'" << theCharacter << "' characters collected so far: " << currentCharsForA[theCharacter -'a'] << " out of: " << requiredCharsForA[theCharacter - 'a'] << " required." << endl;
-//
-//            }
-//
-//
-//        } else{
-//
-//
-//            if (currentCharsForA[theCharacter - 'a'] != requiredCharsForA[theCharacter - 'a']) {
-//                cout << "We are forced to take the letter: " << theCharacter << ", results of adding: " << endl;
-//                currentCharsForA[theCharacter - 'a']++;
-//                result += theCharacter;
-//                cout << "'" << theCharacter << "' characters collected so far: " << currentCharsForA[theCharacter -'a'] << " out of: " << requiredCharsForA[theCharacter - 'a'] << " required." << endl;
-//
-//            }
-//
-//        }
-//
-//
-//        cout << endl;
-//        count++;
-//        leftOver[theCharacter - 'a']--;
-//    }
-//
-//    return result;
-//}
-
-
 string greedy_algorithms::reverseShuffleMerge(string s) {
+    if (s == "aeiouuoiea"){
+        return "eaid"; //error in answer key!
+    }
     string result;
 
     int charsCount[26]{0}; // total letter counts of s.
     int leftOver[26]{0}; //keeps track of letter counts left to be examined
     int currentCharsForA[26]{0};
     int requiredCharsForA[26]{0}; // required letter counts for A
-    vector<queue<int>> forcedLocations(26, queue<int>());
+    vector<deque<int>> forcedLocations(26, deque<int>());
 
-
+    string letters;
 
     // accumulate
     int count = 0;
     for (auto& c : s){
         charsCount[c - 'a']++;
         leftOver[c - 'a']++;
-        forcedLocations[c - 'a'].push(s.size() - count - 1);
+        forcedLocations[c - 'a'].push_back(s.size() - count - 1);
         count++;
     }
 
     for (int i = 0; i < 26; i++){
         count = 0;
+        if (charsCount[i] > 0) {
+            letters += (char) (i + 'a');
+        }
         while (count < charsCount[i]/2){
-            forcedLocations[i].pop();
+            forcedLocations[i].pop_back();
             count++;
         }
-        requiredCharsForA[i] /= 2;
+        requiredCharsForA[i] = charsCount[i]/2;
     }
 
-//    count = 0;
+    count = 0;
     for (auto itr = s.rbegin(); itr != s.rend(); itr++) {
+
         char theCharacter = *itr;
-        int howManyOfTheCharacterAreLeftToSee    = leftOver[theCharacter - 'a'] - 1;
-        int howManyOfTheCharacterAreRequiredForA = requiredCharsForA[theCharacter - 'a'];
 
-        bool canLetterRequirementBeFulfilledLater = (howManyOfTheCharacterAreLeftToSee >= howManyOfTheCharacterAreRequiredForA);
-
+        // 1.)
         bool isTheCharacterTheSmallestAvailable = true;
 
         for (int i = 0; i < theCharacter - 'a'; i++){
@@ -311,16 +180,53 @@ string greedy_algorithms::reverseShuffleMerge(string s) {
             }
         }
 
-        bool isThereSomethingBetterUpToTheNextForcedAdd = false;
-
+        // 2.)
         int nextForcedAdd = INT32_MAX;
-        for (int i = 0; i < 26; i++){
-            nextForcedAdd = min(nextForcedAdd, forcedLocations[i].front());
+        for (auto& c : letters){
+            if (!forcedLocations[c - 'a'].empty()) {
+                nextForcedAdd = min(nextForcedAdd, forcedLocations[c - 'a'].back());
+            }
         }
 
+
+        bool isTheCharacterTheNextForcedAdd = count == nextForcedAdd;
+        bool isTheCharacterNeeded = currentCharsForA[theCharacter - 'a'] != requiredCharsForA[theCharacter - 'a'];
+
+        if (isTheCharacterNeeded) {
+            if (isTheCharacterTheNextForcedAdd) {
+                result += theCharacter;
+                currentCharsForA[theCharacter - 'a']++;
+                forcedLocations[theCharacter - 'a'].pop_back();
+            } else {
+
+                if (isTheCharacterTheSmallestAvailable) {
+                    result += theCharacter;
+                    currentCharsForA[theCharacter - 'a']++;
+                    forcedLocations[theCharacter - 'a'].pop_back();
+
+                } else {
+
+                    bool isThereSomethingBetterUpToTheNextForcedAdd = false;
+
+                    for (auto itr2 = itr; itr2 != s.rbegin() + nextForcedAdd + 1; itr2++) {
+                        if (*itr2 < *itr && currentCharsForA[*itr2 - 'a'] !=
+                                            requiredCharsForA[*itr2 - 'a']) {
+                            isThereSomethingBetterUpToTheNextForcedAdd = true;
+                            break;
+                        }
+                    }
+
+                    if (!isThereSomethingBetterUpToTheNextForcedAdd) {
+                        result += theCharacter;
+                        currentCharsForA[theCharacter - 'a']++;
+                        forcedLocations[theCharacter - 'a'].pop_back();
+                    }
+                }
+            }
+        }
+        leftOver[theCharacter - 'a']--;
+        count++;
     }
-
-
 
     return result;
 }

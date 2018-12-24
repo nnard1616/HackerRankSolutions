@@ -49,6 +49,15 @@ namespace common{
         cout << endl;
     }
 
+    template<class TwoDIterableContainer>
+    static void print_2Dcontainer(TwoDIterableContainer in){
+
+        for (auto& i : in){
+            common::print_container(i);
+        }
+
+    }
+
     template<class PrintableObject>
     static void print_array(PrintableObject a[], int s){
         for (int i = 0; i < s; i++){
