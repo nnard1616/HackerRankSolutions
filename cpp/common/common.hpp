@@ -67,8 +67,17 @@ namespace common{
         cout << endl;
     }
 
+    template<class PrintableObject>
+    static void print_2Darray(PrintableObject** a, int I, int J){
+        for (int i = 0; i < I; i++){
+            print_array(a[i], J);
+        }
+
+        cout << endl;
+    }
+
     // returns iterator pointing either to a position with value equal to query (no guarantees which one if duplicates)
-    // or pointing to position where a value equal to query should be inserted to maintin sorted order.
+    // or pointing to position where a value equal to query should be inserted to maintain sorted order.
     template<class Comparable, class RandomAccessIterableContainer>
     static typename RandomAccessIterableContainer::iterator binary_search(const Comparable& query, RandomAccessIterableContainer& in){
 

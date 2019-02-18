@@ -4,7 +4,8 @@
 
 #ifndef CPP_PRACTICE_HPP
 #define CPP_PRACTICE_HPP
-#import <bits/stdc++.h>
+#include <bits/stdc++.h>
+#include "../common/common.hpp"
 
 using namespace std;
 namespace google_application {
@@ -35,6 +36,99 @@ namespace google_application {
             }
 
             count++;
+        }
+
+        return result;
+    }
+
+    int solution1(vector<int> &A) {
+        unordered_map<int, int> valueToOriginalIndex;
+        vector<int> sortedArray = A;
+        sort(A.begin(), A.end());
+        int result = 0;
+
+        // populate value to index map
+        for (int i = 0; i < A.size(); i++){
+            valueToOriginalIndex[A[i]] = i;
+        }
+
+
+        // go through all possible starting points
+        for (int j = 0; j < A.size(); j++){
+
+            int k = j;
+            int jumpCount = 0;
+
+            while (k != A.size()-1){
+
+                jumpCount++;
+
+                // odd jump
+                if (jumpCount % 2 == 1){ //odd jump
+
+                    auto position = common::binary_search(A[k], sortedArray);
+
+                    while ( position != sortedArray.end()){
+
+                        if (valueToOriginalIndex[*position] > k){
+                            k = valueToOriginalIndex[*position];
+                            break;
+                        }
+
+                        position++;
+                    }
+
+                    if (position == sortedArray.end()){
+                        break; // move on to next starting position
+                    }
+                } else { // even jump
+
+                    auto position = common::binary_search(A[k], sortedArray);
+
+                    while ( position != sortedArray.begin()-1){
+
+                        if (valueToOriginalIndex[*position] > k){
+                            k = valueToOriginalIndex[*position];
+                            break;
+                        }
+
+                        position--;
+                    }
+
+                    if (position == sortedArray.begin()-1){
+                        break; // move on to next starting position
+                    }
+                }
+
+                if (k == A.size() -1){
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
+
+
+    int solution2(vector<int> &S, vector<int> &E) {
+        // write your code in C++14 (g++ 6.2.0)
+        unordered_map<int, int> timeToGuestArrivals;
+        unordered_map<int, int> timeToGuestDepartures;
+        int minTime = 1;
+        int maxTime = 1000;
+
+        int result = INT32_MIN;
+        int concurrentCount = 0;
+
+        for (int i = 0; i < S.size(); i++){
+            timeToGuestArrivals[S[i]]++;
+            timeToGuestDepartures[E[i]]++;
+        }
+
+
+        for (int time = minTime; time <= maxTime; time++){
+            concurrentCount += timeToGuestArrivals[time];
+            concurrentCount -= timeToGuestDepartures[time];
+            result = max(result, concurrentCount);
         }
 
         return result;
