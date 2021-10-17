@@ -76,10 +76,9 @@ namespace common{
         cout << endl;
     }
 
-    // returns iterator pointing either to a position with value equal to query (no guarantees which one if duplicates)
-    // or pointing to position where a value equal to query should be inserted to maintain sorted order.
+    // returns iterator pointing to a position where a query value could be inserted and maintain sorted order.
     template<class Comparable, class RandomAccessIterableContainer>
-    static typename RandomAccessIterableContainer::iterator binary_search(const Comparable& query, RandomAccessIterableContainer& in){
+    static typename RandomAccessIterableContainer::iterator binary_search_for_insertion_point(const Comparable& query, RandomAccessIterableContainer& in){
 
         typedef typename RandomAccessIterableContainer::iterator iterator;
 
@@ -205,7 +204,7 @@ namespace common{
     vector<T> subVector(typename vector<T>::iterator begin, typename vector<T>::iterator end){
         vector<T> result;
         for (auto itr = begin; itr != end; itr++){
-            result.insert(common::binary_search(*itr, result), *itr);
+            result.insert(common::binary_search_for_insertion_point(*itr, result), *itr);
         }
         return result;
     }

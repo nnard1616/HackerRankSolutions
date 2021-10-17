@@ -29,7 +29,7 @@ namespace common {
 
                 // insert at back
                 unsortedOrder.push_back(in);
-                sortedOrder.insert(common::binary_search(in, sortedOrder), in);
+                sortedOrder.insert(common::binary_search_for_insertion_point(in, sortedOrder), in);
 
             } else {
                 // erase head
@@ -37,13 +37,13 @@ namespace common {
 
                 // insert at back
                 unsortedOrder.push_back(in);
-                sortedOrder.insert(common::binary_search(in, sortedOrder), in);
+                sortedOrder.insert(common::binary_search_for_insertion_point(in, sortedOrder), in);
             }
         }
 
         bool dequeue () {
             Comparable toBeErased = unsortedOrder[0];
-            sortedOrder.erase(common::binary_search(toBeErased, sortedOrder));
+            sortedOrder.erase(common::binary_search_for_insertion_point(toBeErased, sortedOrder));
             // next line causes a segfault??
             // SIGILL (signal SIGILL: illegal instruction operand)
             // Process finished with exit code 132 (interrupted by signal 4: SIGILL)

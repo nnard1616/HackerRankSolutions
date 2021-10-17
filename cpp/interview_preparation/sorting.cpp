@@ -80,8 +80,8 @@ int sorting::activityNotifications(vector<int> expenditure, int d) {
         }
 
         // update window
-        window.erase(common::binary_search(*startOfWindow, window));
-        window.insert(common::binary_search(*endOfWindow, window), *endOfWindow);
+        window.erase(common::binary_search_for_insertion_point(*startOfWindow, window));
+        window.insert(common::binary_search_for_insertion_point(*endOfWindow, window), *endOfWindow);
         startOfWindow++;
         endOfWindow++;
     }

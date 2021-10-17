@@ -31,49 +31,49 @@ class binarySearch : public commonTests{
 
     TEST_F(binarySearch, evenMissing){
 
-        EXPECT_EQ(5, *common::binary_search(4, sortedEven));
+        EXPECT_EQ(5, *common::binary_search_for_insertion_point(4, sortedEven));
 
     }
 
     TEST_F(binarySearch, oddMissing){
 
-        EXPECT_EQ(5,*common::binary_search(4, sortedOdd));
+        EXPECT_EQ(5,*common::binary_search_for_insertion_point(4, sortedOdd));
 
     }
 
     TEST_F(binarySearch, oddPresent){
 
-        EXPECT_EQ(8,*common::binary_search(8, sortedOdd));
+        EXPECT_EQ(8,*common::binary_search_for_insertion_point(8, sortedOdd));
 
     }
 
     TEST_F(binarySearch, evenPresent){
 
-        EXPECT_EQ(8,*common::binary_search(8, sortedEven));
+        EXPECT_EQ(8,*common::binary_search_for_insertion_point(8, sortedEven));
 
     }
 
     TEST_F(binarySearch, evenPresentLower){
 
-        EXPECT_EQ(1,*common::binary_search(1, sortedEven));
+        EXPECT_EQ(1,*common::binary_search_for_insertion_point(1, sortedEven));
 
     }
 
     TEST_F(binarySearch, oddPresentLower){
 
-        EXPECT_EQ(1,*common::binary_search(1, sortedOdd));
+        EXPECT_EQ(1,*common::binary_search_for_insertion_point(1, sortedOdd));
 
     }
 
     TEST_F(binarySearch, oddMissingLower){
 
-        EXPECT_EQ(1,*common::binary_search(0, sortedOdd));
+        EXPECT_EQ(1,*common::binary_search_for_insertion_point(0, sortedOdd));
 
     }
 
     TEST_F(binarySearch, evenMissingLower){
 
-        EXPECT_EQ(1,*common::binary_search(0, sortedEven));
+        EXPECT_EQ(1,*common::binary_search_for_insertion_point(0, sortedEven));
 
     }
 
@@ -85,7 +85,7 @@ class binarySearch : public commonTests{
 
     TEST_F(binarySearch, evenPresentUpper){
 
-        EXPECT_EQ(9,*common::binary_search(9, sortedEven));
+        EXPECT_EQ(9,*common::binary_search_for_insertion_point(9, sortedEven));
 
     }
 

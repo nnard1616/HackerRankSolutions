@@ -66,7 +66,7 @@ namespace google_application {
                 // odd jump
                 if (jumpCount % 2 == 1){ //odd jump
 
-                    auto position = common::binary_search(A[k], sortedArray);
+                    auto position = common::binary_search_for_insertion_point(A[k], sortedArray);
 
                     while ( position != sortedArray.end()){
 
@@ -83,7 +83,7 @@ namespace google_application {
                     }
                 } else { // even jump
 
-                    auto position = common::binary_search(A[k], sortedArray);
+                    auto position = common::binary_search_for_insertion_point(A[k], sortedArray);
 
                     while ( position != sortedArray.begin()-1){
 

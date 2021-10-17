@@ -125,5 +125,29 @@ namespace search{
     vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries);
 
     vector<int> inOrderTraversal(vector<vector<int>>& in);
+
+    /*
+     * https://www.hackerrank.com/challenges/pairs/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=search
+     * @param k
+     * @param arr
+     * @return
+     */
+    int pairs(int k, vector<int> arr);
+
+    /**
+     * https://www.hackerrank.com/challenges/triple-sum/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=search&h_r=next-challenge&h_v=zen
+     */
+    long triplets(vector<int> a, vector<int> b, vector<int> c);
+    long triplets2(vector<int> a, vector<int> b, vector<int> c);
+
+    /**
+     *
+     * @param machines
+     * @param goal
+     * @return
+     */
+    long minTime(vector<long> machines, long goal);
+
+    long calc_production(map<long, int> efficiency_counts, long day_count);
 }
 #endif //CPP_SEARCH_HPP
