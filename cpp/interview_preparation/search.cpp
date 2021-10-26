@@ -257,3 +257,134 @@ long search::calc_production(map<long, int> efficiency_counts, long day_count) {
     return production;
 }
 
+
+long search::maximumSum(vector<long> a, long m) {
+    long max_mod = 0;
+    long running_sum = 0;
+
+    auto cleaned_end = remove_if(a.begin(), a.end(), [&m](long &l) {return ((l%m)==0);});
+
+    for (auto it = a.begin(); it != cleaned_end; it++) {
+        for (auto it2 = it; it2 != cleaned_end; it2++) {
+            running_sum = (running_sum + *it2) % m;
+            if (running_sum > max_mod) {
+                max_mod = running_sum;
+            }
+            if ( m - 1 == max_mod) {
+                return max_mod;
+            }
+        }
+        running_sum = 0;
+    }
+
+    return max_mod;
+}
+
+// https://www.quora.com/What-is-the-logic-used-in-the-HackerRank-Maximise-Sum-problem
+// this is a gotchya type problem.  The modulo arithmetic was super intersting though.
+long search::maximumSum2(vector<long> a, long m) {
+    long result = 0;
+    long prefix[a.size()];
+
+    int curr = 0;
+    int prefix_i = 0;
+    for(int i = 0; i < a.size(); i ++) {
+        if (( a[i] % m ) != 0 ) {
+            curr = (a[i] % m + curr) % m;
+            prefix[prefix_i++] = curr;
+        }
+    }
+
+    for(int i = 0; i < prefix_i; i ++) {
+        for(int j = i-1; j >= 0; j --) {
+            result = max(result, (prefix[i] - prefix[j] + m) % m);
+        }
+        result = max(result, prefix[i]); // Don't forget sum from beginning.
+    }
+
+    return result;
+}
+
+bool fncomp (pair<long,long> lhs, pair<long,long> rhs) {
+    if (lhs.first<rhs.first)
+        return true;
+    if (lhs.first==rhs.first)
+        return lhs.second<rhs.second;
+    return false;
+}
+
+long search::maximumSum3(vector<long> a, long m) {
+    long result = 0;
+    pair<long,long> prefix[a.size()];
+    set<int> indicies_present;
+    long curr = 0;
+    int prefix_i = 0;
+
+    // compute the prefix sums first
+    for(int i = 0; i < a.size(); i ++) {
+        if (( a[i] % m ) != 0 ) {
+            curr = (a[i] % m + curr) % m;
+            prefix[prefix_i] = pair<long,long>(curr,prefix_i);
+            //used to keep track of prefix sums available for subtracting from latter prefix sums
+            indicies_present.insert(prefix_i);
+            prefix_i++;
+
+        }
+    }
+
+    sort(prefix, prefix+prefix_i, fncomp);
+    result = prefix[prefix_i-1].first;
+
+
+    long candidate ;
+    for(int p1 = 0; p1 < prefix_i; p1++) {
+        // keep track of which sums are available to subtract
+        indicies_present.erase(prefix[p1].second);
+        if (*(indicies_present.begin()) < prefix[p1].second){
+            for (int p2 = p1 +  1; p2 < prefix_i; p2++) {
+                // can only subtract prefix sums that occurred previously in the original prefix sum array
+                if (prefix[p1].second > prefix[p2].second) {
+                    candidate = (prefix[p1].first - prefix[p2].first + m) % m;
+                    // if the candidate is smaller than the current largest modulus, then there's no way incrementing
+                    // the second pointer will get us a bigger better result as incremeing the second pointer will only
+                    // make the subsequent candidates smaller.
+                    if (candidate < result) {
+                        break;
+                    }
+                    result = candidate;
+                    if (result == m - 1) {
+                        return result;
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
+
+long search::maximumSum4(vector<long> a, long m) {
+    long result = 0;
+    set<pair<long,long>, bool(*)(pair<long,long>,pair<long,long>)> prefix(fncomp);
+    long curr = 0;
+    for(int i = 0; i < a.size(); i ++) {
+        curr = (a[i] % m + curr) % m;
+        prefix.insert(pair<long,long>(curr,i));
+    }
+    result = (prefix.end()--)->first;
+
+
+    long candidate ;
+    for(auto p1 = prefix.begin(); p1 != prefix.end(); p1++) {
+        for (auto p2 = p1; p2 != prefix.end(); p2++) {
+            if (p1->second > p2->second) {
+                candidate = ( p1->first - p2->first  + m ) % m;
+                if (candidate < result) {
+                   break;
+                }
+                result = candidate;
+            }
+        }
+    }
+    return result;
+}
+

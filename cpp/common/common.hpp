@@ -77,6 +77,8 @@ namespace common{
     }
 
     // returns iterator pointing to a position where a query value could be inserted and maintain sorted order.
+    // similar to std::lower_bound and std::upper_bound, but with no guarantees on position in the case of duplicates
+    // present in a sorted array.
     template<class Comparable, class RandomAccessIterableContainer>
     static typename RandomAccessIterableContainer::iterator binary_search_for_insertion_point(const Comparable& query, RandomAccessIterableContainer& in){
 

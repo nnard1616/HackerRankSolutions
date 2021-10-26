@@ -149,5 +149,19 @@ namespace search{
     long minTime(vector<long> machines, long goal);
 
     long calc_production(map<long, int> efficiency_counts, long day_count);
+
+    /**
+     *
+     * @param a
+     * @param m
+     * @return
+     */
+    long maximumSum(vector<long> a, long m);
+
+    long maximumSum2(vector<long> a, long m);
+
+    long maximumSum3(vector<long> a, long m);
+
+    long maximumSum4(vector<long> a, long m);
 }
 #endif //CPP_SEARCH_HPP
