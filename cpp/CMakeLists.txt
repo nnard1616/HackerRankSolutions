@@ -19,7 +19,10 @@ set(SOURCE_FILES
         interview_preparation/greedy_algorithms.cpp
         interview_preparation/search.cpp
         cs484/hwk2.cpp
-        interview_preparation/dynamic_programming.cpp interview_preparation/dynamic_programming.hpp)
+        interview_preparation/dynamic_programming.cpp
+        interview_preparation/stacks_and_queues.cpp
+
+)
 
 set(HEADER_FILES
         interview_preparation/arrays.hpp
@@ -32,9 +35,11 @@ set(HEADER_FILES
         interview_preparation/greedy_algorithms.hpp
         interview_preparation/search.hpp
         cs484/hwk2.hpp
+        interview_preparation/dynamic_programming.hpp
+        interview_preparation/stacks_and_queues.hpp
 )
 
-add_executable(cpp ${SOURCE_FILES})
+add_executable(cpp ${SOURCE_FILES} interview_preparation/stacks_and_queues.cpp interview_preparation/stacks_and_queues.hpp)
 
 add_library(cppStatic STATIC
             ${SOURCE_FILES})

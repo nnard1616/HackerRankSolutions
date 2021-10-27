@@ -9,6 +9,7 @@
 #include "interview_preparation/greedy_algorithms.hpp"
 #include "interview_preparation/search.hpp"
 #include "interview_preparation/dynamic_programming.hpp"
+#include "interview_preparation/stacks_and_queues.hpp"
 #include "cs484/hwk2.hpp"
 
 #define SIZE 10000000
@@ -135,11 +136,19 @@ int main() {
 
     int a[] = {2,4,2,6,1,7,8,9,2,1};
     vector<int> av (a, a+10);
+    string s = "{{}(";
+    stacks_and_queues::MyQueue q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    cout << q.front() << endl;
+    q.pop();
+    cout << q.front() << endl;
 
 
     auto start = chrono::high_resolution_clock::now();
 
-    cout << dynamic_programming::candies(10, av) << endl;
+    cout << stacks_and_queues::isBalanced(s) << endl;
 
     auto end = chrono::high_resolution_clock::now();
 
