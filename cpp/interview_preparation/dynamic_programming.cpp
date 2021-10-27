@@ -243,28 +243,27 @@ string dynamic_programming::abbreviation4(string a, string b) {
 }
 
 long dynamic_programming::candies(int n, vector<int> arr) {
-    long memo[n];
-    memo[0] = 0;
 
-    if (arr.empty()) {
-        return 0;
-    }
+    long c[n];
 
-    for (int i = 0; i < n; i++) {
-        memo[i] = 1;
+    fill_n(c, n, 1);
 
-        if (i != 0 ) {
-            if ( arr[i-1] < arr[i]) {
-                memo[i] = memo[i-1] + 1;
-            }
-
-            if ( arr[i-1] > arr[i]) {
-                memo[i-1]++;
-            }
+    for (int i = 1; i < n; i++) {
+        if (arr[i-1] < arr[i] && c[i-1] >= c[i] ) {
+            c[i] = c[i-1] + 1;
         }
-        memo[i] = memo[0] + 1;
     }
 
+    long result = c[n-1];
 
-    return 0;
+    for (int i = n-2; i > -1; i--) {
+        if (arr[i+1] < arr[i] && c[i+1] >= c[i] ) {
+            c[i] = c[i+1] +1;
+        }
+        result += c[i];
+    }
+
+//    common::print_array(c, n);
+
+    return result;
 }
