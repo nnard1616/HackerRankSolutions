@@ -43,5 +43,7 @@ namespace dynamic_programming{
                                 map<const char *, bool> &memo, map<const char *, bool> &memo2);
 
     string abbreviation4(string a, string b);
+
+    long candies(int n, vector<int> arr);
 }
 #endif //CPP_DYNAMIC_PROGRAMMING_HPP

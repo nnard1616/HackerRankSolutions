@@ -241,3 +241,30 @@ string dynamic_programming::abbreviation4(string a, string b) {
     }
     return memo[a.length()][b.length()] ? "YES" : "NO";
 }
+
+long dynamic_programming::candies(int n, vector<int> arr) {
+    long memo[n];
+    memo[0] = 0;
+
+    if (arr.empty()) {
+        return 0;
+    }
+
+    for (int i = 0; i < n; i++) {
+        memo[i] = 1;
+
+        if (i != 0 ) {
+            if ( arr[i-1] < arr[i]) {
+                memo[i] = memo[i-1] + 1;
+            }
+
+            if ( arr[i-1] > arr[i]) {
+                memo[i-1]++;
+            }
+        }
+        memo[i] = memo[0] + 1;
+    }
+
+
+    return 0;
+}
