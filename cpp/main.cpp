@@ -134,21 +134,16 @@ void testRestructuring(){
 
 int main() {
 
-    int a[] = {2,4,2,6,1,7,8,9,2,1};
-    vector<int> av (a, a+10);
+    int a[] = {1,2,3,4,5};
+    vector<int> av (a, a+5);
     string s = "{{}(";
-    stacks_and_queues::MyQueue q;
-    q.push(1);
-    q.push(2);
-    q.push(3);
-    cout << q.front() << endl;
-    q.pop();
-    cout << q.front() << endl;
+
+
 
 
     auto start = chrono::high_resolution_clock::now();
 
-    cout << stacks_and_queues::isBalanced(s) << endl;
+    cout << stacks_and_queues::largestRectangle(av) << endl;
 
     auto end = chrono::high_resolution_clock::now();
 
