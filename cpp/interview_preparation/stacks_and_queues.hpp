@@ -44,6 +44,8 @@ namespace stacks_and_queues{
     };
 
     long largestRectangle(vector<int> h);
+
+    vector<long> riddle(vector<long> arr);
 }
 
 

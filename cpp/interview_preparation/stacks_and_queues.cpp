@@ -82,3 +82,30 @@ long stacks_and_queues::largestRectangle(vector<int> h) {
 
     return result;
 }
+
+vector<long> stacks_and_queues::riddle(vector<long> arr) {
+    long max_of_w_min = 0;
+    long min_overall;
+    unsigned long n = arr.size();
+    long min_memo[n];
+    vector<long> result;
+
+    for (int i = 0; i < n; i++) {
+        min_memo[i] = arr[i];
+        max_of_w_min = max(max_of_w_min, arr[i]);
+        min_overall = min(min_overall, arr[i]);
+    }
+    result.push_back(max_of_w_min);
+
+    for (int w = 2; w < n + 1; w++) {
+        max_of_w_min = 0;
+        for (int i = 0; i < n - w + 1; i++) {
+            min_memo[i] = min(arr[i+w-1], min_memo[i]);
+            max_of_w_min = max(max_of_w_min, min_memo[i]);
+        }
+        result.push_back(max_of_w_min);
+
+    }
+
+    return result;
+}
