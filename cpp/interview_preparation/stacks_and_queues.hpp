@@ -46,6 +46,9 @@ namespace stacks_and_queues{
     long largestRectangle(vector<int> h);
 
     vector<long> riddle(vector<long> arr);
+
+    vector<long> riddle2(vector<long> arr);
+    int minimumMoves(vector<string> grid, int startX, int startY, int goalX, int goalY);
 }
 
 

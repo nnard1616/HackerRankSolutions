@@ -76,6 +76,14 @@ namespace common{
         cout << endl;
     }
 
+    template <class PrintableObject, size_t rows, size_t cols>
+    static void print_2Darray( PrintableObject( &array )[rows][cols] ) {
+        for (int i = 0; i < rows; i++){
+            print_array(array[i], cols);
+        }
+        cout << endl;
+    }
+
     // returns iterator pointing to a position where a query value could be inserted and maintain sorted order.
     // similar to std::lower_bound and std::upper_bound, but with no guarantees on position in the case of duplicates
     // present in a sorted array.
